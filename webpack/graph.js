@@ -6,12 +6,10 @@ function buildDependencyGraph(entryFile) {
 
   function traverse(file) {
     if (!graph[file]) {
-      const fileContent = readFile(file); // Alteração para usar readFile
-      const dependencies = getDependencies(fileContent); // Ajuste para obter as dependências do conteúdo lido
-      console.log('dependencies :>> ', dependencies);
+      const dependencies = getDependencies(file);
       graph[file] = {
         dependencies,
-        code: fileContent, // Atribui o conteúdo lido do arquivo à propriedade 'code'
+        code: readFile(file),
       };
       dependencies.forEach((dep) => traverse(dep));
     }
